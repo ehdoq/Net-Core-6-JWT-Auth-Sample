@@ -76,7 +76,7 @@ namespace NetCore6JWTAuthSample.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] UserRegistration userRegistration)
+        public async Task<IActionResult> Register(UserRegistration userRegistration)
         {
             var userExists = await _userManager.FindByNameAsync(userRegistration.Username);
             
@@ -93,7 +93,7 @@ namespace NetCore6JWTAuthSample.Controllers
             var result = await _userManager.CreateAsync(user, userRegistration.Password);
 
             if (!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to create user, please try again.");
+                return StatusCode(StatusCodes.Status500InternalServerError, result.Errors);
 
             return Ok("User created successfully.");
         }
