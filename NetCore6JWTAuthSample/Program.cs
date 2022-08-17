@@ -8,7 +8,7 @@ ConfigurationManager configuration = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
-    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                                                    options.UseSqlServer(configuration.GetConnectionString("ConStr")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDBContext>()
                                                           .AddDefaultTokenProviders();
