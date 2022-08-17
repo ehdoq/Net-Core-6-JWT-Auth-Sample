@@ -41,9 +41,10 @@ namespace NetCore6JWTAuthSample.Controllers
         //3. Sonra iki adet endpoint oluşturduk, biri kullanıcıların kayıt olabileceği(api/UserAuth/Register), diğeri ise kullanıcıların giriş yapabileceği(api/UserAuth/Login).
         //Register kısmı kullanıcının gönderdiği verileri alacak ve doğrulama yapacak. Eğer kayıt varsa kaydetmeyecek, kayıt yoksa kayıt gerçekleşecek.
         //Login kısmı ise kullanıcının login olup olmadığı kontrol edecek. Eğer kayıt varsa login olacak, yoksa hata mesaşı dönecektir.
+        
         #region Endpoints
         [HttpPost]
-        [Route("login")]
+        [Route("Login")]
         public async Task<IActionResult> Login([FromBody] UserLogin userLogin)
         {
             var user = await _userManager.FindByNameAsync(userLogin.Username);
@@ -75,8 +76,8 @@ namespace NetCore6JWTAuthSample.Controllers
         }
 
         [HttpPost]
-        [Route("register")]
-        public async Task<IActionResult> Register(UserRegistration userRegistration)
+        [Route("Register")]
+        public async Task<IActionResult> Register([FromBody] UserRegistration userRegistration)
         {
             var userExists = await _userManager.FindByNameAsync(userRegistration.Username);
             
